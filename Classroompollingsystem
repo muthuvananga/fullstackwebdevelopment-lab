@@ -1,0 +1,34 @@
+APP.JSX
+import { useState } from "react";
+
+function App() {
+  const [votes, setVotes] = useState({ Yes: 0, No: 0 });
+
+  const vote = (option) => {
+    setVotes({ ...votes, [option]: votes[option] + 1 });
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Classroom Poll</h2>
+      <button onClick={() => vote("Yes")}>Yes</button>
+      <button onClick={() => vote("No")}>No</button>
+
+      <h3>Results:</h3>
+      <p>Yes: {votes.Yes}</p>
+      <p>No: {votes.No}</p>
+    </div>
+  );
+}
+
+export default App;
+MAIN CODING:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
