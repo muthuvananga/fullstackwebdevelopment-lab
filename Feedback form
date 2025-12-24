@@ -1,0 +1,42 @@
+APP.JSX:
+import { useState } from "react";
+
+function App() {
+  const [feedback, setFeedback] = useState("");
+  const [list, setList] = useState([]);
+
+  const submitFeedback = () => {
+    setList([...list, feedback]);
+    setFeedback("");
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h2>Feedback Form</h2>
+      <input
+        value={feedback}
+        onChange={(e) => setFeedback(e.target.value)}
+      />
+      <button onClick={submitFeedback}>Submit</button>
+
+      <h3>Submitted Feedback</h3>
+      <ul>
+        {list.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+MAIN CODING:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+export default App;
