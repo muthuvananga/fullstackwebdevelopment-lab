@@ -1,0 +1,101 @@
+
+MAIN CODING:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+App.jsx
+
+function App() {
+  const registerEvent = () => {
+    const participantName = prompt("Enter Participant Name:");
+    if (!participantName) {
+      alert("Registration cancelled! Name is required.");
+      return;
+    }
+
+    const eventName = prompt("Enter Event Name:");
+    if (!eventName) {
+      alert("Event name is required!");
+      return;
+    }
+
+    const confirmRegistration = confirm(
+      `Participant Name: ${participantName}
+Event Name: ${eventName}
+
+Confirm Event Registration?`
+    );
+
+    if (confirmRegistration) {
+      alert(
+        `🎉 Registration Successful!
+
+Participant: ${participantName}
+Event: ${eventName}
+
+See you at the event!`
+      );
+    } else {
+      alert("❌ Registration Cancelled.");
+    }
+  };
+
+  return (
+    <div style={styles.container}>
+      <h2>🎫 Event Registration System</h2>
+
+      <div style={styles.card}>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/2942/2942543.png"
+          alt="Event"
+          style={styles.image}
+        />
+
+        <h3>Register for Event</h3>
+        <p>Simple & quick registration</p>
+
+        <button style={styles.button} onClick={registerEvent}>
+          Register Now
+        </button>
+      </div>
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    fontFamily: "Segoe UI",
+    textAlign: "center",
+    marginTop: "50px",
+  },
+  card: {
+    width: "340px",
+    margin: "auto",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+    backgroundColor: "#ffffff",
+  },
+  image: {
+    width: "90px",
+    marginBottom: "10px",
+  },
+  button: {
+    marginTop: "15px",
+    padding: "10px 22px",
+    backgroundColor: "#673ab7",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  },
+};
+
+export default App;
