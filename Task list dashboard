@@ -1,0 +1,102 @@
+MAIN CODING:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+APP.JSX
+import { useState } from "react";
+
+function App() {
+  const [task, setTask] = useState("");
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = () => {
+    if (!task.trim()) {
+      alert("Task cannot be empty!");
+      return;
+    }
+    setTasks([...tasks, task]);
+    setTask("");
+  };
+
+  const removeTask = (index) => {
+    const updated = tasks.filter((_, i) => i !== index);
+    setTasks(updated);
+  };
+
+  return (
+    <div style={styles.container}>
+      <h2>📝 Task Manager</h2>
+
+      <div style={styles.card}>
+        <input
+          style={styles.input}
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+          placeholder="Enter task"
+        />
+
+        <button style={styles.button} onClick={addTask}>
+          Add Task
+        </button>
+
+        <ul>
+          {tasks.map((t, i) => (
+            <li key={i} style={styles.list}>
+              {t}
+              <button
+                style={styles.delete}
+                onClick={() => removeTask(i)}
+              >
+                ❌
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    textAlign: "center",
+    fontFamily: "Segoe UI",
+    marginTop: "40px",
+  },
+  card: {
+    width: "350px",
+    margin: "auto",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+  },
+  input: {
+    padding: "8px",
+    width: "80%",
+  },
+  button: {
+    marginLeft: "10px",
+    padding: "8px",
+    backgroundColor: "#007bff",
+    color: "white",
+    border: "none",
+  },
+  list: {
+    marginTop: "10px",
+  },
+  delete: {
+    marginLeft: "10px",
+    background: "red",
+    color: "white",
+    border: "none",
+  },
+};
+
+export default App;
