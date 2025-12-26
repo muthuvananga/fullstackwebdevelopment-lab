@@ -1,0 +1,110 @@
+
+MAIN CODING:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+App.jsx
+
+Copy code
+function App() {
+  const bookCab = () => {
+    const passengerName = prompt("Enter Passenger Name:");
+    if (!passengerName) {
+      alert("Booking cancelled! Passenger name is required.");
+      return;
+    }
+
+    const pickup = prompt("Enter Pickup Location:");
+    if (!pickup) {
+      alert("Pickup location is required!");
+      return;
+    }
+
+    const drop = prompt("Enter Drop Location:");
+    if (!drop) {
+      alert("Drop location is required!");
+      return;
+    }
+
+    const confirmBooking = confirm(
+      `Passenger Name: ${passengerName}
+Pickup Location: ${pickup}
+Drop Location: ${drop}
+
+Confirm Cab Booking?`
+    );
+
+    if (confirmBooking) {
+      alert(
+        `🚕 Cab Booked Successfully!
+
+Passenger: ${passengerName}
+Pickup: ${pickup}
+Drop: ${drop}
+
+Driver will arrive shortly.`
+      );
+    } else {
+      alert("❌ Cab Booking Cancelled.");
+    }
+  };
+
+  return (
+    <div style={styles.container}>
+      <h2>🚕 Online Cab Booking System</h2>
+
+      <div style={styles.card}>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/854/854878.png"
+          alt="Cab"
+          style={styles.image}
+        />
+
+        <h3>Book Your Cab</h3>
+        <p>Safe • Fast • Reliable</p>
+
+        <button style={styles.button} onClick={bookCab}>
+          Book Cab
+        </button>
+      </div>
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    fontFamily: "Segoe UI",
+    textAlign: "center",
+    marginTop: "50px",
+  },
+  card: {
+    width: "330px",
+    margin: "auto",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+    backgroundColor: "#ffffff",
+  },
+  image: {
+    width: "90px",
+    marginBottom: "10px",
+  },
+  button: {
+    marginTop: "15px",
+    padding: "10px 22px",
+    backgroundColor: "#ff9800",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  },
+};
+
+export default App;
