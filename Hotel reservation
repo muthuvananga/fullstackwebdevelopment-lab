@@ -1,0 +1,109 @@
+
+MAIN CODING:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+ App.jsx
+
+
+function App() {
+  const reserveRoom = () => {
+    const guestName = prompt("Enter Guest Name:");
+    if (!guestName) {
+      alert("Reservation cancelled! Guest name is required.");
+      return;
+    }
+
+    const roomType = prompt("Enter Room Type (Single / Double / Deluxe):");
+    if (!roomType) {
+      alert("Reservation cancelled! Room type is required.");
+      return;
+    }
+
+    const nights = prompt("Enter Number of Nights:");
+    if (!nights || isNaN(nights) || nights <= 0) {
+      alert("Please enter a valid number of nights.");
+      return;
+    }
+
+    const confirmReservation = confirm(
+      `Guest Name: ${guestName}
+Room Type: ${roomType}
+Number of Nights: ${nights}
+
+Confirm Reservation?`
+    );
+
+    if (confirmReservation) {
+      alert(
+        `🏨 Reservation Confirmed!
+
+Guest: ${guestName}
+Room Type: ${roomType}
+Stay Duration: ${nights} night(s)
+
+Thank you for choosing our hotel 🌟`
+      );
+    } else {
+      alert("❌ Reservation Cancelled.");
+    }
+  };
+
+  return (
+    <div style={styles.container}>
+      <h2>🏨 Hotel Reservation System</h2>
+
+      <div style={styles.card}>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/139/139899.png"
+          alt="Hotel"
+          style={styles.image}
+        />
+
+        <h3>Book Your Stay</h3>
+        <p>Simple & quick room reservation</p>
+
+        <button style={styles.button} onClick={reserveRoom}>
+          Reserve Room
+        </button>
+      </div>
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    fontFamily: "Segoe UI",
+    textAlign: "center",
+    marginTop: "50px",
+  },
+  card: {
+    width: "330px",
+    margin: "auto",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+    backgroundColor: "#ffffff",
+  },
+  image: {
+    width: "90px",
+    marginBottom: "10px",
+  },
+  button: {
+    marginTop: "15px",
+    padding: "10px 20px",
+    backgroundColor: "#28a745",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  },
+};
+
+export default App;
