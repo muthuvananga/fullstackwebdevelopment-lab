@@ -1,0 +1,34 @@
+MAIN CODING:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+App.jsx
+jsx
+Copy code
+function App() {
+  const browseCategory = (category) => {
+    alert(`You selected ${category} category!`);
+  };
+
+  return (
+    <div style={styles.container}>
+      <h2>🛍 Product Browsing</h2>
+      <button style={styles.button} onClick={() => browseCategory("Electronics")}>Electronics</button>
+      <button style={{...styles.button, marginLeft:"10px"}} onClick={() => browseCategory("Fashion")}>Fashion</button>
+      <button style={{...styles.button, marginLeft:"10px"}} onClick={() => browseCategory("Home Appliances")}>Home Appliances</button>
+    </div>
+  );
+}
+
+const styles = {
+  container: { textAlign: "center", marginTop: "40px", fontFamily: "Segoe UI" },
+  button: { padding: "10px 20px", backgroundColor: "#009688", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" },
+};
+
+export default App;
