@@ -1,0 +1,120 @@
+
+MAIN CODING
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+    APP.JSX
+
+import { useState } from "react";
+
+function App() {
+  const [username, setUsername] = useState("");
+  const [role, setRole] = useState("");
+
+  const loginUser = () => {
+    if (!username.trim()) {
+      alert("Username is required!");
+      return;
+    }
+
+    if (!role) {
+      alert("Please select a role!");
+      return;
+    }
+
+    alert(
+      `✅ Login Successful!
+
+Username: ${username}
+Redirecting to ${role} Dashboard...`
+    );
+  };
+
+  return (
+    <div style={styles.container}>
+      <h2>🔐 Role-Based Login</h2>
+
+      <div style={styles.card}>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/747/747376.png"
+          alt="Login"
+          style={styles.image}
+        />
+
+        <input
+          style={styles.input}
+          type="text"
+          placeholder="Enter Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+
+        <select
+          style={styles.select}
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        >
+          <option value="">Select Role</option>
+          <option value="Admin">Admin</option>
+          <option value="Student">Student</option>
+          <option value="Faculty">Faculty</option>
+        </select>
+
+        <button style={styles.button} onClick={loginUser}>
+          Login
+        </button>
+      </div>
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    fontFamily: "Segoe UI",
+    textAlign: "center",
+    marginTop: "50px",
+  },
+  card: {
+    width: "340px",
+    margin: "auto",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+    backgroundColor: "#ffffff",
+  },
+  image: {
+    width: "80px",
+    marginBottom: "10px",
+  },
+  input: {
+    width: "90%",
+    padding: "8px",
+    marginTop: "10px",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
+  },
+  select: {
+    width: "94%",
+    padding: "8px",
+    marginTop: "10px",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
+  },
+  button: {
+    marginTop: "15px",
+    padding: "10px 22px",
+    backgroundColor: "#ff5722",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  },
+};
+
+export default App;
