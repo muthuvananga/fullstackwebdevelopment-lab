@@ -1,0 +1,53 @@
+MAINCODING:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+App.jsx
+jsx
+Copy code
+function App() {
+  const students = [
+    { name: "Ravi", department: "CSE", year: "2nd" },
+    { name: "Anu", department: "ECE", year: "3rd" },
+    { name: "Bala", department: "MECH", year: "1st" },
+  ];
+
+  return (
+    <div style={styles.container}>
+      <h2>🎓 Student Management Dashboard</h2>
+      <table style={styles.table}>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Year</th>
+          </tr>
+        </thead>
+        <tbody>
+          {students.map((s, i) => (
+            <tr key={i}>
+              <td>{s.name}</td>
+              <td>{s.department}</td>
+              <td>{s.year}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+const styles = {
+  container: { textAlign: "center", fontFamily: "Segoe UI", marginTop: "40px" },
+  table: { margin: "auto", borderCollapse: "collapse", width: "60%" },
+  th: { border: "1px solid #ccc", padding: "8px", background: "#f2f2f2" },
+  td: { border: "1px solid #ccc", padding: "8px" },
+};
+
+export default App;
