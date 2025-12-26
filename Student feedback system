@@ -1,0 +1,80 @@
+
+MAIN CODING:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+App.jsx
+jsx
+Copy code
+import { useState } from "react";
+
+function App() {
+  const [rating, setRating] = useState("");
+  const [comment, setComment] = useState("");
+  const [feedbacks, setFeedbacks] = useState([]);
+
+  const submitFeedback = () => {
+    if (!rating || !comment.trim()) {
+      alert("Please provide both rating and comment!");
+      return;
+    }
+
+    const newFeedback = { rating, comment };
+    setFeedbacks([...feedbacks, newFeedback]);
+    setRating("");
+    setComment("");
+    alert("✅ Feedback Submitted Successfully!");
+  };
+
+  return (
+    <div style={styles.container}>
+      <h2>📝 Student Feedback System</h2>
+
+      <div style={styles.card}>
+        <input
+          type="number"
+          min="1"
+          max="5"
+          placeholder="Rating (1-5)"
+          style={styles.input}
+          value={rating}
+          onChange={(e) => setRating(e.target.value)}
+        />
+        <textarea
+          placeholder="Enter your comment"
+          style={styles.textarea}
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
+        <button style={styles.button} onClick={submitFeedback}>
+          Submit Feedback
+        </button>
+      </div>
+
+      <h3>All Feedbacks</h3>
+      <ul>
+        {feedbacks.map((f, i) => (
+          <li key={i}>
+            <b>Rating:</b> {f.rating}, <b>Comment:</b> {f.comment}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+const styles = {
+  container: { textAlign: "center", fontFamily: "Segoe UI", marginTop: "40px" },
+  card: { width: "360px", margin: "auto", padding: "20px", borderRadius: "10px", boxShadow: "0 4px 10px rgba(0,0,0,0.2)", backgroundColor: "#fff" },
+  input: { width: "90%", padding: "8px", marginTop: "10px", borderRadius: "5px", border: "1px solid #ccc" },
+  textarea: { width: "90%", padding: "8px", marginTop: "10px", borderRadius: "5px", border: "1px solid #ccc", height: "60px" },
+  button: { marginTop: "15px", padding: "10px 22px", backgroundColor: "#3f51b5", color: "white", border: "none", borderRadius: "5px", cursor: "pointer" },
+};
+
+export default App;
