@@ -1,0 +1,125 @@
+MAIN CODING:
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+APP.JSX
+
+import { useState } from "react";
+
+function App() {
+  const [students, setStudents] = useState([
+    { name: "Anu", status: "Not Marked" },
+    { name: "Bala", status: "Not Marked" },
+    { name: "Charan", status: "Not Marked" },
+    { name: "Divya", status: "Not Marked" },
+  ]);
+
+  const markAttendance = (index, status) => {
+    const updated = [...students];
+    updated[index].status = status;
+    setStudents(updated);
+
+    alert(`${updated[index].name} marked as ${status}`);
+  };
+
+  return (
+    <div style={styles.container}>
+      <h2>📋 Student Attendance Tracker</h2>
+      <p>Mark attendance dynamically</p>
+
+      <div style={styles.card}>
+        {students.map((student, index) => (
+          <div key={index} style={styles.row}>
+            <span style={styles.name}>{student.name}</span>
+
+            <button
+              style={styles.presentBtn}
+              onClick={() => markAttendance(index, "Present")}
+            >
+              Present
+            </button>
+
+            <button
+              style={styles.absentBtn}
+              onClick={() => markAttendance(index, "Absent")}
+            >
+              Absent
+            </button>
+
+            <span
+              style={{
+                ...styles.status,
+                color:
+                  student.status === "Present"
+                    ? "green"
+                    : student.status === "Absent"
+                    ? "red"
+                    : "gray",
+              }}
+            >
+              {student.status}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    textAlign: "center",
+    fontFamily: "Segoe UI",
+    marginTop: "40px",
+  },
+  card: {
+    width: "420px",
+    margin: "auto",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+    backgroundColor: "#fff",
+  },
+  row: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: "12px",
+  },
+  name: {
+    fontWeight: "bold",
+    width: "80px",
+  },
+  presentBtn: {
+    backgroundColor: "#28a745",
+    color: "white",
+    border: "none",
+    padding: "6px 10px",
+    borderRadius: "5px",
+    cursor: "pointer",
+  },
+  absentBtn: {
+    backgroundColor: "#dc3545",
+    color: "white",
+    border: "none",
+    padding: "6px 10px",
+    borderRadius: "5px",
+    cursor: "pointer",
+  },
+  status: {
+    width: "100px",
+    fontWeight: "bold",
+    textAlign: "right",
+  },
+};
+
+export default App;
+
