@@ -1,0 +1,52 @@
+
+MAINCODING:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+App.jsx
+
+function App() {
+  const bookFlight = () => {
+    const name = prompt("Enter Passenger Name:");
+    if (!name) return alert("Booking cancelled!");
+
+    const from = prompt("From City:");
+    const to = prompt("To City:");
+
+    if (!from || !to) {
+      alert("City details required!");
+      return;
+    }
+
+    const confirmTicket = confirm(
+      `Passenger: ${name}\nRoute: ${from} → ${to}\nConfirm Booking?`
+    );
+
+    confirmTicket
+      ? alert(`✈️ Ticket Booked Successfully!\n${name}\n${from} → ${to}`)
+      : alert("Booking Cancelled");
+  };
+
+  return (
+    <div style={styles.container}>
+      <h2>✈️ Flight Ticket Booking</h2>
+      <button style={styles.button} onClick={bookFlight}>
+        Book Ticket
+      </button>
+    </div>
+  );
+}
+
+const styles = {
+  container: { textAlign: "center", marginTop: "50px", fontFamily: "Segoe UI" },
+  button: { padding: "12px 20px", background: "#ff9800", color: "white", border: "none" },
+};
+
+export default App;
