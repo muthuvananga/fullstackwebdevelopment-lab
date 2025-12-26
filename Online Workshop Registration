@@ -1,0 +1,141 @@
+
+MAIN CODING:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+
+
+App.jsx
+
+import { useState } from "react";
+
+function App() {
+  const [name, setName] = useState("");
+  const [workshop, setWorkshop] = useState("");
+  const [preview, setPreview] = useState(false);
+
+  const submitRegistration = () => {
+    if (!name.trim() || !workshop.trim()) {
+      alert("All fields are required!");
+      return;
+    }
+
+    const confirmSubmit = confirm(
+      `Confirm Workshop Registration?
+
+Name: ${name}
+Workshop: ${workshop}`
+    );
+
+    if (confirmSubmit) {
+      alert(
+        `🎓 Registration Successful!
+
+Participant: ${name}
+Workshop: ${workshop}`
+      );
+    } else {
+      alert("❌ Registration Cancelled.");
+    }
+  };
+
+  return (
+    <div style={styles.container}>
+      <h2>🛠 Online Workshop Registration</h2>
+
+      <div style={styles.card}>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+          alt="Workshop"
+          style={styles.image}
+        />
+
+        <input
+          style={styles.input}
+          type="text"
+          placeholder="Participant Name"
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+            setPreview(true);
+          }}
+        />
+
+        <input
+          style={styles.input}
+          type="text"
+          placeholder="Workshop Title"
+          value={workshop}
+          onChange={(e) => {
+            setWorkshop(e.target.value);
+            setPreview(true);
+          }}
+        />
+
+        {preview && (
+          <div style={styles.previewBox}>
+            <h4>🔍 Live Preview</h4>
+            <p><b>Name:</b> {name}</p>
+            <p><b>Workshop:</b> {workshop}</p>
+          </div>
+        )}
+
+        <button style={styles.button} onClick={submitRegistration}>
+          Submit Registration
+        </button>
+      </div>
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    fontFamily: "Segoe UI",
+    textAlign: "center",
+    marginTop: "40px",
+  },
+  card: {
+    width: "360px",
+    margin: "auto",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+    backgroundColor: "#ffffff",
+  },
+  image: {
+    width: "80px",
+    marginBottom: "10px",
+  },
+  input: {
+    width: "90%",
+    padding: "8px",
+    marginTop: "10px",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
+  },
+  previewBox: {
+    marginTop: "15px",
+    padding: "10px",
+    border: "1px dashed #888",
+    borderRadius: "5px",
+    backgroundColor: "#f9f9f9",
+  },
+  button: {
+    marginTop: "15px",
+    padding: "10px 22px",
+    backgroundColor: "#3f51b5",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  },
+};
+
+export default App;
