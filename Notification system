@@ -1,0 +1,43 @@
+ MAIN CODING
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+App.jsx
+import { useState } from "react";
+
+function App() {
+  const [notifications, setNotifications] = useState([]);
+
+  const addNotification = () => {
+    const note = prompt("Enter Notification Message:");
+    if (!note) return alert("Notification cannot be empty!");
+    setNotifications([...notifications, note]);
+    alert("🔔 Notification Added Successfully!");
+  };
+
+  return (
+    <div style={styles.container}>
+      <h2>🔔 Notification System</h2>
+      <button style={styles.button} onClick={addNotification}>Add Notification</button>
+
+      <h3>Notifications:</h3>
+      <ul>
+        {notifications.map((n, i) => <li key={i}>{n}</li>)}
+      </ul>
+    </div>
+  );
+}
+
+const styles = {
+  container: { textAlign: "center", fontFamily: "Segoe UI", marginTop: "40px" },
+  button: { padding: "10px 20px", backgroundColor: "#ff9800", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", marginBottom: "15px" },
+};
+
+export default App;
