@@ -1,0 +1,63 @@
+MAIN CODING
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+App.jsx
+import { useState } from "react";
+
+function App() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const authenticate = () => {
+    // Example: predefined username & password
+    if (username === "admin" && password === "1234") {
+      alert("✅ Authentication Successful!");
+    } else {
+      alert("❌ Invalid Username or Password");
+    }
+  };
+
+  return (
+    <div style={styles.container}>
+      <h2>🔐 Authentication System</h2>
+
+      <div style={styles.card}>
+        <input
+          style={styles.input}
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          style={styles.input}
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button style={styles.button} onClick={authenticate}>
+          Login
+        </button>
+      </div>
+    </div>
+  );
+}
+
+const styles = {
+  container: { textAlign: "center", fontFamily: "Segoe UI", marginTop: "50px" },
+  card: { width: "320px", margin: "auto", padding: "20px", borderRadius: "10px", boxShadow: "0 4px 10px rgba(0,0,0,0.2)", backgroundColor: "#fff" },
+  input: { width: "90%", padding: "8px", marginTop: "10px", borderRadius: "5px", border: "1px solid #ccc" },
+  button: { marginTop: "15px", padding: "10px 22px", backgroundColor: "#ff5722", color: "#fff", border: "none", borderRadius: "5px", cursor: "pointer" },
+};
+
+export default App;
+     
