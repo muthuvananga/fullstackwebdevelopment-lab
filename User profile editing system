@@ -1,0 +1,125 @@
+
+MAIN CODING:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+
+
+App.jsx
+
+
+import { useState } from "react";
+
+function App() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const saveProfile = () => {
+    if (!name.trim()) {
+      alert("Name is required!");
+      return;
+    }
+
+    if (!email.trim() || !email.includes("@")) {
+      alert("Please enter a valid email address!");
+      return;
+    }
+
+    const confirmSave = confirm(
+      `Confirm Profile Update?
+
+Name: ${name}
+Email: ${email}`
+    );
+
+    if (confirmSave) {
+      alert(
+        `✅ Profile Updated Successfully!
+
+Name: ${name}
+Email: ${email}`
+      );
+    } else {
+      alert("❌ Profile Update Cancelled.");
+    }
+  };
+
+  return (
+    <div style={styles.container}>
+      <h2>👤 User Profile Editor</h2>
+
+      <div style={styles.card}>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
+          alt="Profile"
+          style={styles.image}
+        />
+
+        <input
+          style={styles.input}
+          type="text"
+          placeholder="Enter Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+
+        <input
+          style={styles.input}
+          type="email"
+          placeholder="Enter Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <button style={styles.button} onClick={saveProfile}>
+          Save Profile
+        </button>
+      </div>
+    </div>
+  );
+}
+
+const styles = {
+  container: {
+    fontFamily: "Segoe UI",
+    textAlign: "center",
+    marginTop: "50px",
+  },
+  card: {
+    width: "340px",
+    margin: "auto",
+    padding: "20px",
+    borderRadius: "10px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+    backgroundColor: "#ffffff",
+  },
+  image: {
+    width: "80px",
+    marginBottom: "10px",
+  },
+  input: {
+    width: "90%",
+    padding: "8px",
+    marginTop: "10px",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
+  },
+  button: {
+    marginTop: "15px",
+    padding: "10px 22px",
+    backgroundColor: "#009688",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  },
+};
+
+export default App;
