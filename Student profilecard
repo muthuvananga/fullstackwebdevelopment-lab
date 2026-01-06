@@ -1,0 +1,161 @@
+APP.JSX:
+import React, { useState } from "react";
+
+/* Child Component using Props */
+function StudentDetails({ name, roll, department }) {
+  return (
+    <div style={{
+      backgroundColor: "#e1f5fe",
+      border: "2px solid #0288d1",
+      padding: "15px",
+      borderRadius: "10px",
+      marginBottom: "10px"
+    }}>
+      <h2 style={{ color: "#0d47a1" }}>Student Profile</h2>
+      <p style={{ color: "#212121" }}><b>Name:</b> {name}</p>
+      <p style={{ color: "#212121" }}><b>Roll No:</b> {roll}</p>
+      <p style={{ color: "#212121" }}><b>Department:</b> {department}</p>
+    </div>
+  );
+}
+
+/* Individual Attendance Tracker */
+function AttendanceTracker() {
+  const [present, setPresent] = useState(0);
+  const [absent, setAbsent] = useState(0);
+
+  return (
+    <div style={{
+      backgroundColor: "#e8f5e9",
+      border: "2px solid #2e7d32",
+      padding: "15px",
+      borderRadius: "10px",
+      marginBottom: "10px"
+    }}>
+      <h3 style={{ color: "#1b5e20" }}>Attendance Tracker</h3>
+      <p style={{ color: "#212121", fontWeight: "500" }}>Present Days: {present}</p>
+      <p style={{ color: "#212121", fontWeight: "500" }}>Absent Days: {absent}</p>
+
+      <button
+        style={{
+          marginRight: "10px",
+          backgroundColor: "#4caf50",
+          color: "white",
+          border: "none",
+          padding: "5px 10px",
+          borderRadius: "5px"
+        }}
+        onClick={() => setPresent(present + 1)}
+      >
+        Mark Present
+      </button>
+
+      <button
+        style={{
+          backgroundColor: "#f44336",
+          color: "white",
+          border: "none",
+          padding: "5px 10px",
+          borderRadius: "5px"
+        }}
+        onClick={() => setAbsent(absent + 1)}
+      >
+        Mark Absent
+      </button>
+    </div>
+  );
+}
+
+/* Individual Result Status */
+function ResultStatus() {
+  const [isPassed, setIsPassed] = useState(true);
+
+  return (
+    <div style={{
+      backgroundColor: "#fff3e0",
+      border: "2px solid #ef6c00",
+      padding: "15px",
+      borderRadius: "10px",
+      marginBottom: "15px"
+    }}>
+      <h3 style={{ color: "#e65100" }}>Result Status</h3>
+      <p style={{ fontWeight: "bold", color: isPassed ? "#1b5e20" : "#b71c1c" }}>
+        {isPassed ? "Status: PASS" : "Status: FAIL"}
+      </p>
+
+      <button
+        style={{
+          backgroundColor: "#ff9800",
+          color: "white",
+          border: "none",
+          padding: "5px 10px",
+          borderRadius: "5px"
+        }}
+        onClick={() => setIsPassed(!isPassed)}
+      >
+        Toggle Result
+      </button>
+    </div>
+  );
+}
+
+/* Main App Component */
+function App() {
+  // Array of 10 students
+  const students = [
+    { name: "Dhivya", roll: "22CS101", department: "Computer Science" },
+    { name: "Kavya", roll: "22IT204", department: "Information Technology" },
+    { name: "Meena", roll: "22ECE312", department: "Electronics" },
+    { name: "Aarav", roll: "22ME105", department: "Mechanical" },
+    { name: "Riya", roll: "22CS102", department: "Computer Science" },
+    { name: "Aditya", roll: "22IT205", department: "Information Technology" },
+    { name: "Sneha", roll: "22ECE313", department: "Electronics" },
+    { name: "Vikram", roll: "22ME106", department: "Mechanical" },
+    { name: "Ananya", roll: "22CS103", department: "Computer Science" },
+    { name: "Karthik", roll: "22IT206", department: "Information Technology" },
+  ];
+
+  return (
+    <div style={{
+      minHeight: "100vh",
+      backgroundColor: "#f5f5f5",
+      padding: "20px",
+      fontFamily: "Arial"
+    }}>
+      <h1 style={{
+        textAlign: "center",
+        color: "#3f51b5",
+        marginBottom: "20px"
+      }}>
+        React.js – 10 Students Demo
+      </h1>
+
+      {/* Render each student with individual Attendance & Result */}
+      {students.map((student, index) => (
+        <div key={index} style={{ marginBottom: "30px" }}>
+          <StudentDetails
+            name={student.name}
+            roll={student.roll}
+            department={student.department}
+          />
+          <AttendanceTracker />
+          <ResultStatus />
+          <hr style={{ marginTop: "20px", marginBottom: "20px" }} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default App;
+
+Main.jsx:
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
